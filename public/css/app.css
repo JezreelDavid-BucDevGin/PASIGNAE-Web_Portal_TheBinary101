@@ -1,0 +1,229 @@
+/* PASIGNAE - Diocese of Pasig Custom Styles */
+
+:root {
+    --pasignae-navy: #1e3a5f;
+    --pasignae-burgundy: #7c2d3e;
+    --pasignae-gold: #c9a227;
+    --pasignae-cream: #faf8f5;
+    --pasignae-ivory: #f5f0e8;
+    --pasignae-sage: #4a6741;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--pasignae-cream);
+}
+
+.font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Stained glass hero gradient */
+.hero-gradient {
+    background: linear-gradient(135deg,
+        #1e3a5f 0%,
+        #2d4a6f 25%,
+        #7c2d3e 50%,
+        #5a2340 75%,
+        #1e3a5f 100%);
+    background-size: 400% 400%;
+    animation: stainedGlass 15s ease infinite;
+}
+
+@keyframes stainedGlass {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Gold accent line */
+.gold-line {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--pasignae-gold), transparent);
+}
+
+/* Card hover effect */
+.card-sacred {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-sacred:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(30, 58, 95, 0.12);
+}
+
+/* Cross watermark */
+.cross-watermark::before {
+    content: '✝';
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 4rem;
+    opacity: 0.04;
+    color: var(--pasignae-burgundy);
+    pointer-events: none;
+}
+
+/* Status badges */
+.badge-pending { background: #fef3c7; color: #92400e; }
+.badge-approved { background: #d1fae5; color: #065f46; }
+.badge-rejected { background: #fee2e2; color: #991b1b; }
+.badge-completed { background: #dbeafe; color: #1e40af; }
+.badge-cancelled { background: #f5f5f4; color: #57534e; }
+.badge-paid { background: #d1fae5; color: #065f46; }
+
+/* Sidebar */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    color: #d6d3d1;
+    transition: all 0.2s;
+}
+.sidebar-link:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+.sidebar-link.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-left: 4px solid #fbbf24;
+}
+
+/* Loading spinner */
+.spinner {
+    border: 3px solid rgba(201, 162, 39, 0.2);
+    border-top-color: var(--pasignae-gold);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Schedule slide-over */
+body.schedule-panel-open {
+    overflow: hidden;
+}
+
+.schedule-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 58, 95, 0.45);
+    z-index: 50;
+}
+
+.schedule-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 60;
+    width: min(26rem, 100%);
+    height: 100%;
+    background: #fff;
+    box-shadow: -16px 0 40px rgba(30, 58, 95, 0.18);
+    transform: translateX(100%);
+    transition: transform 0.28s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.schedule-panel.is-open {
+    transform: translateX(0);
+}
+
+.cal-day {
+    aspect-ratio: 1;
+    border-radius: 0.6rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    color: #a8a29e;
+    background: transparent;
+}
+
+.cal-day.is-pad {
+    pointer-events: none;
+}
+
+.cal-day.is-empty {
+    color: #d6d3d1;
+}
+
+.cal-day.is-available {
+    color: var(--pasignae-navy);
+    background: #faf8f5;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cal-day.is-available:hover {
+    border-color: var(--pasignae-gold);
+    background: #fff;
+}
+
+.cal-day.is-unavailable {
+    color: #a8a29e;
+    background: repeating-linear-gradient(-45deg, #f5f5f4, #f5f5f4 4px, #ecebe9 4px, #ecebe9 8px);
+    cursor: pointer;
+    text-decoration: line-through;
+}
+
+.cal-day.is-today {
+    box-shadow: inset 0 0 0 1px var(--pasignae-burgundy);
+}
+
+.cal-day.is-selected {
+    background: var(--pasignae-navy) !important;
+    color: #fff !important;
+    border-color: var(--pasignae-gold);
+}
+
+.cal-legend {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 0.2rem;
+}
+
+.cal-legend-available { background: #faf8f5; border: 1px solid var(--pasignae-navy); }
+.cal-legend-selected { background: var(--pasignae-navy); }
+.cal-legend-full { background: repeating-linear-gradient(-45deg, #f5f5f4, #f5f5f4 3px, #ecebe9 3px, #ecebe9 6px); }
+
+.schedule-time-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e7e5e4;
+    background: #fff;
+    color: var(--pasignae-navy);
+    text-align: left;
+    transition: all 0.15s ease;
+}
+
+.schedule-time-btn:hover:not(:disabled) {
+    border-color: var(--pasignae-gold);
+    background: var(--pasignae-cream);
+}
+
+.schedule-time-btn.is-selected {
+    border-color: var(--pasignae-gold);
+    background: var(--pasignae-navy);
+    color: #fff;
+}
+
+.schedule-time-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--pasignae-ivory); }
+::-webkit-scrollbar-thumb { background: var(--pasignae-burgundy); border-radius: 4px; }
